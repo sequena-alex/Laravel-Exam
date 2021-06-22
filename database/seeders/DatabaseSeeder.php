@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,5 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(1)->create();
+        DB::table('settings')->insert([
+            'email_recipient' => 'mark.salvania@outgive.ca',
+        ]);
     }
 }

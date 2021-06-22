@@ -66,6 +66,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $imageName = time() . '.' . $data['company_logo']->getClientOriginalExtension();
+        $data['company_logo']->move('companylogos', $imageName);
+        $image_url = 'companylogos/' . $imageName;
+
         return User::create([
             'company_name' => $data['company_name'],
             'company_website' => $data['company_website'],
@@ -73,6 +77,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => 'company',
+            'company_logo' => $image_url
         ]);
     }
 }
